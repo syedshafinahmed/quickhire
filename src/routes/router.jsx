@@ -3,7 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/home/Home";
 import FindJobs from "../pages/findjobs/FindJobs";
 import Companies from "../pages/companies/Companies";
-import Login from "../pages/login/Login";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/register";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: '/login',
         Component: Login,
+      },
+      {
+        path: '/register',
+        Component: Register,
       },
     ]
   }

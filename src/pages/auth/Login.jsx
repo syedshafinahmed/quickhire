@@ -83,7 +83,7 @@ const Login = () => {
           </button>
 
           <div className="grid grid-cols-2 gap-4 mt-8">
-            <button className="bg-[#26A4FF] text-white py-3 font-semibold hover:bg-[#1f88d9] transition">
+            <button className="bg-[#202430] text-white py-3 font-semibold hover:bg-[#474950] transition">
               Admin Login
             </button>
             <button className="bg-[#202430] text-white py-3 font-semibold hover:bg-[#474950] transition">
