@@ -89,13 +89,13 @@ const Latest = () => {
         {jobs.map((job, index) => (
           <div
             key={index}
-            className="w-145 h-37.25 bg-white flex items-center justify-center z-10"
+            className="w-full md:w-145 md:h-37.25 border border-gray-300 bg-white flex items-center justify-items-start pl-5 md:pl-20 z-10 py-5 md:py-0"
           >
             <div className="flex gap-6">
               <img
                 src={job.image}
                 alt=""
-                className="w-16 h-16 object-cover"
+                className="w-10 md:w-16 h-10 md:h-16 object-cover"
               />
 
               <div>
@@ -108,7 +108,7 @@ const Latest = () => {
                 </p>
 
                 <div className="flex gap-2">
-                  <span className="text-[#56CDAD] bg-[#56CDAD]/20 rounded-3xl text-xs py-2 px-4 font-semibold">
+                  <span className="text-[#56CDAD] hidden md:block bg-[#56CDAD]/20 rounded-3xl text-xs py-2 px-4 font-semibold">
                     Full Time
                   </span>
 
