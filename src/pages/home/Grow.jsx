@@ -8,7 +8,7 @@ import img5 from "../../assets/talkit 1.png";
 
 const Grow = () => {
   return (
-    <div className="max-w-7xl mx-auto py-12">
+    <div className="max-w-7xl mx-auto py-12 px-5 md:px-0">
       <p className="text-gray-400 mb-8 epilogue text-lg">
         Companies we helped grow
       </p>
