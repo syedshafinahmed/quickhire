@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
         <div className='text-white border border-t-white' />
         <div className='py-11'>
-          <div className='flex flex-col md:flex-row justify-center items-center gap-5'>
+          <div className='flex flex-col md:flex-row justify-center md:justify-between items-center gap-5'>
             <p className='font-medium text-gray-400'>&copy; {new Date().getFullYear()} QuickHire. All Rights Reserved.</p>
             <div className='flex gap-6 items-center'>
               <div className='w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center'>

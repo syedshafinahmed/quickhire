@@ -30,18 +30,20 @@ const Navbar = () => {
 
         <div className="flex justify-between items-center">
           <div className="flex gap-12 items-center">
-            <Logo />
+            <NavLink to='/'>
+              <Logo />
+            </NavLink>
             <div className="hidden md:flex">{links}</div>
           </div>
 
           <div className="flex gap-8 items-center">
             <div className="hidden md:flex gap-2">
-              <button className="font-bold bg-white text-[#4640DE] w-27 h-12">
+              <NavLink to='/login' className="font-bold bg-white flex justify-center items-center text-[#4640DE] w-27 h-10">
                 Log In
-              </button>
-              <button className="font-bold bg-[#4640DE] text-white w-27 h-12">
+              </NavLink>
+              <NavLink to='/register' className="font-bold flex justify-center items-center bg-[#4640DE] text-white w-27 h-10">
                 Sign Up
-              </button>
+              </NavLink>
             </div>
 
             <div className="md:hidden">
@@ -76,12 +78,12 @@ const Navbar = () => {
           <div className="flex flex-col mt-4 md:hidden">
             {links}
             <div className="flex flex-col mt-4 gap-2">
-              <button className="font-bold bg-white text-[#4640DE] w-full h-12">
+              <NavLink to='' className="font-bold bg-white text-[#4640DE] w-full h-12">
                 Log In
-              </button>
-              <button className="font-bold bg-[#4640DE] text-white w-full h-12">
+              </NavLink>
+              <NavLink to='/register' className="font-bold flex items-center justify-center bg-[#4640DE] text-white w-full h-12">
                 Sign Up
-              </button>
+              </NavLink>
             </div>
           </div>
         )}
