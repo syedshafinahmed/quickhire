@@ -5,6 +5,7 @@ import Explore from './Explore';
 import Poster from './Poster';
 import Featured from './Featured';
 import Latest from './Latest';
+import ScrollToTop from '../../components/ScrollToTop';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <Poster></Poster>
       <Featured></Featured>
       <Latest></Latest>
+      <ScrollToTop></ScrollToTop>
     </div>
   );
 };
