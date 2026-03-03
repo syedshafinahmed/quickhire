@@ -1,7 +1,52 @@
 import { FcGoogle } from "react-icons/fc";
 import pattern from '../../assets/pattern.png';
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signInUser, signInWithGoogle, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signInUser(email, password);
+      navigate('/');
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  }
+
+  const handleGoogleSignIn = () => {
+    setLoading(true);
+    signInWithGoogle()
+      .then((result) => {
+        setLoading(false);
+        Swal.fire({
+          icon: 'success',
+          title: 'Google Sign-In Successful!',
+          text: `Welcome, ${result.user.displayName}!`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        const from = location.state?.from || '/';
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setLoading(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Google Sign-In Failed!',
+          text: error.message,
+        });
+      });
+  };
+
   return (
     <div className="min-h-screen bg-[#F8F8FD] flex items-center justify-center epilogue mb-10">
       <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2  bg-white shadow-xl">
@@ -38,15 +83,15 @@ const Login = () => {
             </p>
           </div>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-xs uppercase tracking-wider text-gray-600 rhd mb-2">
                 Email Address
               </label>
               <input
-                type="email"
+                type="email" onChange={(e) => setEmail(e.target.value)}
                 className="w-full border border-gray-300 px-4 py-3 focus:outline-none focus:border-[#4640DE]"
-                placeholder="you@example.com"
+                placeholder="you@example.com" required
               />
             </div>
 
@@ -55,9 +100,9 @@ const Login = () => {
                 Password
               </label>
               <input
-                type="password"
+                type="password" onChange={(e) => setPassword(e.target.value)}
                 className="w-full border border-gray-300 px-4 py-3 focus:outline-none focus:border-[#4640DE]"
-                placeholder="••••••••"
+                placeholder="••••••••" required
               />
             </div>
 
@@ -75,7 +120,7 @@ const Login = () => {
             <div className="flex-1 h-px bg-gray-300"></div>
           </div>
 
-          <button className="w-full border border-gray-300 py-3 flex items-center justify-center gap-3 hover:bg-gray-100 transition">
+          <button onClick={handleGoogleSignIn} className="w-full border border-gray-300 py-3 flex items-center justify-center gap-3 hover:bg-gray-100 transition">
             <FcGoogle size={22} />
             <span className="rhd text-lg font-medium">
               Continue with Google

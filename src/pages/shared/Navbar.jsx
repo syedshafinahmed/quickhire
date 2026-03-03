@@ -1,9 +1,33 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Logo from '../../logo/Logo';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged Out!',
+        text: 'You have successfully logged out.',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      navigate('/login');
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Logout Failed!',
+        text: error.message,
+      });
+    }
+  };
 
   const links = (
     <>
@@ -37,14 +61,21 @@ const Navbar = () => {
           </div>
 
           <div className="flex gap-8 items-center">
-            <div className="hidden md:flex gap-2">
-              <NavLink to='/login' className="font-bold bg-white flex justify-center items-center text-[#4640DE] w-27 h-10">
-                Log In
-              </NavLink>
-              <NavLink to='/register' className="font-bold flex justify-center items-center bg-[#4640DE] text-white w-27 h-10">
-                Sign Up
-              </NavLink>
-            </div>
+            {user ? (
+              <button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-27 h-10">
+                Logout
+              </button>
+            ) : (
+              <div className="hidden md:flex gap-2">
+                <NavLink to='/login' className="font-bold bg-white flex justify-center items-center text-[#4640DE] w-27 h-10">
+                  Log In
+                </NavLink>
+                <NavLink to='/register' className="font-bold flex justify-center items-center bg-[#4640DE] text-white w-27 h-10">
+                  Sign Up
+                </NavLink>
+              </div>
+
+            )}
 
             <div className="md:hidden">
               <button
@@ -72,7 +103,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div >
 
         {isOpen && (
           <div className="flex flex-col mt-4 md:hidden">
@@ -87,8 +118,8 @@ const Navbar = () => {
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </div >
+    </div >
 
   );
 };
