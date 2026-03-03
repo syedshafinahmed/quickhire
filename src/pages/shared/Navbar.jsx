@@ -39,12 +39,23 @@ const Navbar = () => {
         Find Jobs
       </NavLink>
       <NavLink
-        className="text-[#515B6F] font-medium"
+        className="text-[#515B6F] font-medium mr-4"
         to="/browse-companies"
         onClick={() => setIsOpen(false)}
       >
         Browse Companies
       </NavLink>
+      {
+        user && (
+          <NavLink
+            className="text-[#515B6F] font-medium"
+            to="/dashboard"
+            onClick={() => setIsOpen(false)}
+          >
+            Dashboard
+          </NavLink>
+        )
+      }
     </>
   );
 
@@ -62,9 +73,13 @@ const Navbar = () => {
 
           <div className="flex gap-8 items-center">
             {user ? (
-              <button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-27 h-10">
-                Logout
-              </button>
+              <div className="hidden md:flex gap-2">
+                <img src={user.photoURL || "https://via.placeholder.com/150"} referrerPolicy="no-referrer" alt="User" className='h-10 border border-[#4640DE]' />
+                <button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-27 h-10">
+                  Logout
+                </button>
+              </div>
+
             ) : (
               <div className="hidden md:flex gap-2">
                 <NavLink to='/login' className="font-bold bg-white flex justify-center items-center text-[#4640DE] w-27 h-10">
@@ -108,16 +123,21 @@ const Navbar = () => {
         {isOpen && (
           <div className="flex flex-col mt-4 md:hidden">
             {links}
-            <div className="flex flex-col mt-4 gap-2">
-              <NavLink to='' className="font-bold bg-white text-[#4640DE] w-full h-12">
-                Log In
-              </NavLink>
-              <NavLink to='/register' className="font-bold flex items-center justify-center bg-[#4640DE] text-white w-full h-12">
-                Sign Up
-              </NavLink>
-            </div>
+            {
+              user ? (<button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-full h-12">
+                Logout
+              </button>) : (<div className="flex flex-col mt-4 gap-2">
+                <NavLink to='' className="font-bold bg-white text-[#4640DE] w-full h-12">
+                  Log In
+                </NavLink>
+                <NavLink to='/register' className="font-bold flex items-center justify-center bg-[#4640DE] text-white w-full h-12">
+                  Sign Up
+                </NavLink>
+              </div>)
+            }
           </div>
-        )}
+        )
+        }
       </div >
     </div >
 
