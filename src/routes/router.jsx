@@ -5,6 +5,8 @@ import FindJobs from "../pages/findjobs/FindJobs";
 import Companies from "../pages/companies/Companies";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/register";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -33,5 +35,9 @@ export const router = createBrowserRouter([
         Component: Register,
       },
     ]
+  },
+  {
+    path: '/dashboard',
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
   }
 ])
