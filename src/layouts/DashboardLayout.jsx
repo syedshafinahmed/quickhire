@@ -12,6 +12,7 @@ import {
   HelpCircle,
   Bell,
   Plus,
+  Home,
 } from "lucide-react";
 import Logo from "../logo/Logo";
 import { AuthContext } from "../context/AuthContext";
@@ -42,6 +43,9 @@ const DashboardLayout = () => {
         </div>
 
         <nav className="px-4 py-6 text-sm text-gray-600">
+          <NavLink to='/'>
+            <MenuItem icon={<Home size={18} />} label="Home" />
+          </NavLink>
           <MenuItem icon={<LayoutDashboard size={18} />} label="Dashboard" active />
           <MenuItem icon={<MessageSquare size={18} />} label="Messages" />
           <MenuItem icon={<Users size={18} />} label="Applicants" />

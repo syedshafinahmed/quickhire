@@ -15,18 +15,32 @@ const PostJob = () => {
     setJob({ ...job, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newJob = {
-      ...job,
-      created_at: new Date(),
-    };
+    const newJob = { ...job };
 
-    console.log("Job submitted:", newJob);
+    const res = await fetch("http://localhost:3000/jobs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newJob),
+    });
 
-    // TODO: send to backend
-    // fetch("/api/jobs", { method: "POST", body: JSON.stringify(newJob) })
+    const data = await res.json();
+
+    if (data.success) {
+      console.log("Job posted:", data);
+      setJob({
+        logo: "",
+        title: "",
+        company: "",
+        location: "",
+        category: "",
+        description: "",
+      });
+    }
   };
 
   return (
@@ -98,10 +112,10 @@ const PostJob = () => {
               className="w-full border border-gray-300 px-3 py-2 focus:outline-none focus:border-[#4640DE]"
             >
               <option value="">Select category</option>
-              <option value="Frontend">Frontend</option>
-              <option value="Backend">Backend</option>
-              <option value="Full Stack">Full Stack</option>
-              <option value="Design">Design</option>
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Contract">Contract</option>
+              <option value="Remote">Remote</option>
             </select>
           </div>
         </div>
