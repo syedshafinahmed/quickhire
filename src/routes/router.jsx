@@ -8,6 +8,8 @@ import Register from "../pages/auth/register";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PostJob from "../pages/dashboard/PostJob";
+import JobDetails from "../pages/dashboard/JobDetails";
+import PostedJobs from "../pages/dashboard/PostedJobs";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,12 @@ export const router = createBrowserRouter([
         path: '/register',
         Component: Register,
       },
+      {
+        path: "jobs/:_id",
+        Component: JobDetails,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/jobs/${params._id}`).then(res => res.json())
+      }
     ]
   },
   {
@@ -44,7 +52,11 @@ export const router = createBrowserRouter([
       {
         path: 'post-job',
         Component: PostJob
-      }
+      },
+      {
+        path: 'posted-jobs',
+        Component: PostedJobs
+      },
     ]
   }
 ])

@@ -49,7 +49,9 @@ const DashboardLayout = () => {
           <MenuItem icon={<LayoutDashboard size={18} />} label="Dashboard" active />
           <MenuItem icon={<MessageSquare size={18} />} label="Messages" />
           <MenuItem icon={<Users size={18} />} label="Applicants" />
-          <MenuItem icon={<Briefcase size={18} />} label="Job Listing" />
+          <NavLink to='/dashboard/posted-jobs'>
+            <MenuItem icon={<Briefcase size={18} />} label="Job Listing" />
+          </NavLink>
           <MenuItem icon={<Calendar size={18} />} label="My Schedule" />
 
           <div className="mt-10 px-2 text-xs text-gray-400">SETTINGS</div>

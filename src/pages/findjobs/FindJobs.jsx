@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useNavigate } from "react-router";
 
 const FindJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Fetch jobs 
   useEffect(() => {
@@ -85,11 +87,11 @@ const FindJobs = () => {
                   <span />
                 )}
 
-                <div
+                <button onClick={() => navigate(`/jobs/${job._id}`)}
                   className="group text-[#4640DE] clashDisplay font-bold flex gap-2 items-center cursor-pointer transition-all duration-200 ease-out active:scale-95">
                   <span>Details</span>
                   <FaArrowRightLong className="transition-transform duration-200 group-hover:translate-x-1" />
-                </div>
+                </button>
               </div>
             </div>
           ))}
