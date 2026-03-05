@@ -5,24 +5,34 @@ import { useNavigate } from "react-router";
 const FindJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
   const navigate = useNavigate();
+
+  const fetchJobs = async () => {
+    try {
+      setLoading(true);
+
+      const query = new URLSearchParams({
+        search,
+        category,
+      });
+
+      const res = await fetch(`http://localhost:3000/jobs?${query}`);
+      const data = await res.json();
+
+      setJobs(data);
+    } catch (err) {
+      console.error("Failed to fetch jobs:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Fetch jobs 
   useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/jobs");
-        const data = await res.json();
-        setJobs(data);
-      } catch (err) {
-        console.error("Failed to fetch jobs:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchJobs();
-  }, []);
+  }, [search, category]);
 
   const categoryColorMap = {
     "part-time": "text-[#FFB836] border-[#FFB836]",
@@ -32,12 +42,48 @@ const FindJobs = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-0 py-8 epilogue">
-      <div className="mb-8 text-left">
-        <h1 className="text-4xl font-bold text-gray-800">Find Your <span className="text-[#4640DE] font-black">Next Job</span></h1>
-        <p className="mt-2 text-gray-500 text-lg">
-          Browse all available job listings and apply today
-        </p>
+    <div className="max-w-7xl min-h-screen mx-auto px-4 md:px-0 py-8 epilogue">
+      <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+        <div>
+          <h1 className="text-4xl font-bold text-gray-800">
+            Find Your <span className="text-[#4640DE] font-black">Next Job</span>
+          </h1>
+
+          <p className="mt-2 text-gray-500 text-lg">
+            Browse all available job listings and apply today
+          </p>
+        </div>
+
+        <div className="flex gap-3">
+
+          <input
+            type="text"
+            placeholder="Search jobs..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-[#4640DE]"
+          />
+
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:border-[#4640DE]"
+          >
+            <option value="all">All</option>
+            <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+            <option value="Contract">Contract</option>
+            <option value="Remote">Remote</option>
+          </select>
+
+          <button
+            onClick={fetchJobs}
+            className="bg-[#4640DE] text-white px-4 py-2 text-sm"
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       {loading ? (
