@@ -41,19 +41,19 @@ const Navbar = () => {
   const links = (
     <>
       <NavLink
-        className="text-[#515B6F] font-medium mr-4"
+        className="text-[#515B6F] font-medium mr-5"
         to="/find-jobs"
         onClick={() => setIsOpen(false)}
       >
         Find Jobs
       </NavLink>
-      <NavLink
-        className="text-[#515B6F] font-medium mr-4"
-        to="/browse-companies"
+      <span
+        className="text-[#515B6F] font-medium mr-5"
+        // to="/browse-companies"
         onClick={() => setIsOpen(false)}
       >
         Browse Companies
-      </NavLink>
+      </span>
       {
         user && (
           <NavLink
@@ -84,7 +84,7 @@ const Navbar = () => {
             {user ? (
               <div className="hidden md:flex gap-2">
                 <img src={userData?.photoURL} referrerPolicy="no-referrer" alt="User" className='h-10 border border-[#4640DE]' />
-                <button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-27 h-10">
+                <button onClick={handleLogout} className="font-bold border border-[#4640DE] bg-white text-[#4640DE] w-27 h-10">
                   Logout
                 </button>
               </div>
@@ -133,7 +133,7 @@ const Navbar = () => {
           <div className="flex flex-col mt-4 md:hidden">
             {links}
             {
-              user ? (<button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-full h-12">
+              user ? (<button onClick={handleLogout} className="font-bold border border-[#4640DE] bg-white text-[#4640DE] w-full h-12">
                 Logout
               </button>) : (<div className="flex flex-col mt-4 gap-2">
                 <NavLink to='' className="font-bold bg-white text-[#4640DE] w-full h-12">
