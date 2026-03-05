@@ -10,6 +10,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PostJob from "../pages/dashboard/PostJob";
 import JobDetails from "../pages/dashboard/JobDetails";
 import PostedJobs from "../pages/dashboard/PostedJobs";
+import EditJob from "../pages/dashboard/EditJob";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
         path: 'posted-jobs',
         Component: PostedJobs
       },
+      {
+        path: "jobs/:id/edit",
+        element: <EditJob></EditJob>
+      }
     ]
   }
 ])

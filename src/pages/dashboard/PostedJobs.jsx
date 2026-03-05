@@ -95,7 +95,7 @@ const PostedJobs = () => {
                     <button onClick={() => { navigate(`/jobs/${job._id}`) }} className="text-gray-500 hover:text-blue-700 transition-all">
                       <FaEye size={20} />
                     </button>
-                    <button onClick={() => { navigate(`/jobs/${job._id}/edit`) }} className="text-gray-500 hover:text-yellow-700 transition-all">
+                    <button onClick={() => { navigate(`/dashboard/jobs/${job._id}/edit`) }} className="text-gray-500 hover:text-yellow-700 transition-all">
                       <FaEdit size={18} />
                     </button>
                     <button onClick={() => handleDelete(job._id)} className="text-gray-500 hover:text-red-700 transition-all">
