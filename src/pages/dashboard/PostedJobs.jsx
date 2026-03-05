@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { FaEye, FaTrash } from "react-icons/fa6";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const PostedJobs = () => {
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,6 +23,32 @@ const PostedJobs = () => {
     };
     fetchJobs();
   }, []);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Delete this job?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, delete it",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await fetch(`http://localhost:3000/jobs/${id}`, {
+          method: "DELETE",
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          setJobs(jobs.filter((job) => job._id !== id));
+
+          Swal.fire("Deleted!", "Job has been removed.", "success");
+        }
+      }
+    });
+  };
 
   if (loading) return <p className="text-center mt-10 text-gray-500">Loading jobs...</p>;
   if (!jobs.length) return <p className="text-center mt-10 text-gray-500">No jobs posted yet.</p>;
@@ -63,13 +92,13 @@ const PostedJobs = () => {
 
                 <td className="px-6 py-4 border border-gray-300">
                   <div className="flex justify-center items-center gap-5">
-                    <button className="text-blue-500 hover:text-blue-700 transition-all">
-                      <FaEye size={16} />
+                    <button onClick={() => { navigate(`/jobs/${job._id}`) }} className="text-gray-500 hover:text-blue-700 transition-all">
+                      <FaEye size={20} />
                     </button>
-                    <button className="text-yellow-500 hover:text-yellow-700 transition-all">
-                      <FaEdit size={16} />
+                    <button onClick={() => { navigate(`/jobs/${job._id}/edit`) }} className="text-gray-500 hover:text-yellow-700 transition-all">
+                      <FaEdit size={18} />
                     </button>
-                    <button className="text-red-500 hover:text-red-700 transition-all">
+                    <button onClick={() => handleDelete(job._id)} className="text-gray-500 hover:text-red-700 transition-all">
                       <FaTrash size={16} />
                     </button>
                   </div>
