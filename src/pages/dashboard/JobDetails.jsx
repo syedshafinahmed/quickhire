@@ -8,8 +8,8 @@ const JobDetails = () => {
   if (!job) return <p className="text-center text-gray-500 mt-10">Job not found.</p>;
 
   const categoryColorMap = {
-    "full-time": "text-[#FFB836] border-[#FFB836]",
-    "part-time": "text-[#56CDAD] border-[#56CDAD]",
+    "part-time": "text-[#FFB836] border-[#FFB836]",
+    "full-time": "text-[#56CDAD] border-[#56CDAD]",
     "contract": "text-[#FF6550] border-[#FF6550]",
     "remote": "text-[#4640DE] border-[#4640DE]",
   };

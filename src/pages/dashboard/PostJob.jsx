@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const PostJob = () => {
+  const navigate = useNavigate();
   const [job, setJob] = useState({
     logo: "",
     title: "",
@@ -32,6 +35,8 @@ const PostJob = () => {
 
     if (data.success) {
       console.log("Job posted:", data);
+      navigate('/dashboard/posted-jobs');
+      Swal.fire("Success!", "Job has been posted successfully.", "success");
       setJob({
         logo: "",
         title: "",

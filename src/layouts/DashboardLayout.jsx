@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router";
 import {
   Menu,
@@ -19,6 +19,15 @@ import { AuthContext } from "../context/AuthContext";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+      if (user?.email) {
+        fetch(`http://localhost:3000/users?email=${user.email}`)
+          .then(res => res.json())
+          .then(data => setUserData(data))
+          .catch(err => console.error("Failed to fetch user data:", err));
+      }
+    }, [user]);
   const [open, setOpen] = useState(false);
 
   return (
@@ -66,9 +75,12 @@ const DashboardLayout = () => {
             <button className="lg:hidden" onClick={() => setOpen(true)}>
               <Menu size={22} />
             </button>
-            <div>
-              <p className="text-sm text-gray-500">Good morning,</p>
-              <h2 className="font-semibold text-gray-800">{user.displayName}</h2>
+            <div className="flex gap-5">
+              <img src={userData?.photoURL} referrerPolicy="no-referrer" alt="User" className='h-10 border border-[#4640DE]' />
+              <div>
+                <p className="text-sm text-gray-500">Good morning,</p>
+                <h2 className="font-semibold text-gray-800 uppercase">{user.displayName}</h2>
+              </div>
             </div>
           </div>
 

@@ -17,12 +17,31 @@ const Register = () => {
     e.preventDefault();
     try {
       await registerUser(email, password);
-      await updateUserProfile({ displayName: name });
+      await updateUserProfile({ displayName: name, photoURL: "https://via.placeholder.com/150", });
+
+      const response = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          photoURL: "https://via.placeholder.com/150",
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Failed to save user to MongoDB:", data.error);
+      }
       navigate('/');
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful!',
+      });
     } catch (error) {
       console.error("Registration failed:", error);
     }
-  }
+  };
 
   const handleGoogleSignIn = () => {
     setLoading(true);

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Logo from '../../logo/Logo';
 import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext';
@@ -7,6 +7,15 @@ import Swal from 'sweetalert2';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:3000/users?email=${user.email}`)
+        .then(res => res.json())
+        .then(data => setUserData(data))
+        .catch(err => console.error("Failed to fetch user data:", err));
+    }
+  }, [user]);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -74,7 +83,7 @@ const Navbar = () => {
           <div className="flex gap-8 items-center">
             {user ? (
               <div className="hidden md:flex gap-2">
-                <img src={user.photoURL || "https://via.placeholder.com/150"} referrerPolicy="no-referrer" alt="User" className='h-10 border border-[#4640DE]' />
+                <img src={userData?.photoURL} referrerPolicy="no-referrer" alt="User" className='h-10 border border-[#4640DE]' />
                 <button onClick={handleLogout} className="font-bold bg-white text-[#4640DE] w-27 h-10">
                   Logout
                 </button>
