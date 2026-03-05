@@ -11,6 +11,7 @@ import PostJob from "../pages/dashboard/PostJob";
 import JobDetails from "../pages/dashboard/JobDetails";
 import PostedJobs from "../pages/dashboard/PostedJobs";
 import EditJob from "../pages/dashboard/EditJob";
+import AppliedJobs from "../pages/dashboard/AppliedJobs";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: 'post-job',
         Component: PostJob
+      },
+      {
+        path: 'applied-jobs',
+        Component: AppliedJobs
       },
       {
         path: 'posted-jobs',

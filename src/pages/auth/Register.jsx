@@ -70,7 +70,7 @@ const Register = () => {
 
 
   return (
-    <div className="min-h-screen bg-[#F8F8FD] flex items-center justify-center epilogue mb-10 mt-5.5">
+    <div className="min-h-screen bg-[#F8F8FD] flex items-center justify-center epilogue mb-10 mt-3.5">
       <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 bg-white shadow-xl">
 
         <div className="bg-[#4640DE] relative text-white p-12 flex flex-col justify-between overflow-hidden">
@@ -157,15 +157,6 @@ const Register = () => {
               Continue with Google
             </span>
           </button>
-
-          <div className="grid grid-cols-2 gap-4 mt-6">
-            <button className="bg-[#202430] text-white py-3 font-semibold hover:bg-[#474950] transition">
-              Admin Register
-            </button>
-            <button className="bg-[#202430] text-white py-3 font-semibold hover:bg-[#474950] transition">
-              Applicant Register
-            </button>
-          </div>
 
           <p className="text-center text-sm text-gray-500 rhd mt-6">
             Already have an account?{" "}

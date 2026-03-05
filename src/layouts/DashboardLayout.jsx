@@ -16,18 +16,19 @@ import {
 } from "lucide-react";
 import Logo from "../logo/Logo";
 import { AuthContext } from "../context/AuthContext";
+import { IoClipboardOutline } from "react-icons/io5";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
-    const [userData, setUserData] = useState(null);
-    useEffect(() => {
-      if (user?.email) {
-        fetch(`http://localhost:3000/users?email=${user.email}`)
-          .then(res => res.json())
-          .then(data => setUserData(data))
-          .catch(err => console.error("Failed to fetch user data:", err));
-      }
-    }, [user]);
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:3000/users?email=${user.email}`)
+        .then(res => res.json())
+        .then(data => setUserData(data))
+        .catch(err => console.error("Failed to fetch user data:", err));
+    }
+  }, [user]);
   const [open, setOpen] = useState(false);
 
   return (
@@ -58,9 +59,15 @@ const DashboardLayout = () => {
           <MenuItem icon={<LayoutDashboard size={18} />} label="Dashboard" active />
           <MenuItem icon={<MessageSquare size={18} />} label="Messages" />
           <MenuItem icon={<Users size={18} />} label="Applicants" />
-          <NavLink to='/dashboard/posted-jobs'>
-            <MenuItem icon={<Briefcase size={18} />} label="Job Listing" />
-          </NavLink>
+
+          {
+            userData?.role === "admin" && (
+              <NavLink to='/dashboard/posted-jobs'>
+                <MenuItem icon={<Briefcase size={18} />} label="Posted Jobs" />
+              </NavLink>
+            )
+          }
+
           <MenuItem icon={<Calendar size={18} />} label="My Schedule" />
 
           <div className="mt-10 px-2 text-xs text-gray-400">SETTINGS</div>
@@ -88,12 +95,29 @@ const DashboardLayout = () => {
             <button className="p-2 hover:bg-gray-100">
               <Bell size={18} />
             </button>
-            <NavLink to='/dashboard/post-job'>
-              <button className="bg-[#4640DE] text-white px-4 py-2 text-sm flex items-center gap-2">
-                <Plus size={15} />
-                <span>Post a job</span>
-              </button>
-            </NavLink>
+            {
+              userData?.role === "admin" && (
+                <NavLink to='/dashboard/post-job'>
+                  <button className="bg-[#4640DE] text-white px-4 py-2 text-sm flex items-center gap-2">
+                    <Plus size={15} />
+                    <span>Post a job</span>
+                  </button>
+                </NavLink>
+              )
+            }
+
+            {
+              userData?.role === "applicant" && (
+                <NavLink to='/dashboard/applied-jobs'>
+                  <button className="bg-[#4640DE] text-white px-4 py-2 text-sm flex items-center gap-2">
+                    <IoClipboardOutline />
+                    <span>Applied Jobs</span>
+                  </button>
+                </NavLink>
+              )
+            }
+
+
           </div>
         </header>
 
