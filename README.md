@@ -1,16 +1,203 @@
-# React + Vite
+# QuickHire 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack job board web application built with React, Firebase, and MongoDB. QuickHire connects employers with applicants through a clean, role-based dashboard experience — complete with a polished public-facing landing page.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+### Landing Page
+- **Hero Banner** — headline search bar with job title/keyword input and location selector
+- **Grow Section** — auto-scrolling marquee of partner company logos (Vodafone, Intel, Tesla, AMD)
+- **Explore by Category** — 8 job categories (Design, Sales, Marketing, Finance, Technology, Engineering, Business, HR) with live job counts and hover animations
+- **Poster CTA** — "Start posting jobs today" promotional banner with a clipped polygon design
+- **Featured Jobs** — 8 static featured job cards with company logos, tags, and type badges
+- **Latest Jobs Open** — grid of the most recent job listings with company, location, and category tags
+- **Footer** — dark footer with About/Resources links, email newsletter subscription, and social media icons
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### For Applicants
+- Browse and search job listings by title or category (Full-Time, Part-Time, Contract, Remote)
+- View detailed job descriptions
+- Apply to jobs with a resume (Google Drive link) and cover letter
+- Track all submitted applications in a personal dashboard
+- Prevent duplicate applications — the "Apply Now" button becomes "Applied" after submission
 
-## Expanding the ESLint configuration
+### For Admins
+- Post new job listings with company details, location, and category
+- View, edit, and delete posted jobs
+- View all applicants across every job posting
+- Dashboard overview with total users, jobs, and applications at a glance
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### General
+- Firebase Authentication — email/password and Google Sign-In
+- Role-based routing (admin vs. applicant views)
+- Protected routes with loading state
+- Responsive sticky navbar with mobile hamburger menu
+- Responsive sidebar dashboard layout with mobile drawer
+- Scroll-to-top button
+- SweetAlert2 notifications for all key actions
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 19, React Router v7 |
+| Styling | Tailwind CSS v4, DaisyUI |
+| Auth | Firebase Authentication |
+| Backend | Node.js / Express (runs on `localhost:3000`) |
+| Database | MongoDB |
+| Icons | Lucide React, React Icons |
+| Alerts | SweetAlert2 |
+| Marquee | react-fast-marquee |
+| Loader | react-loader-spinner |
+| Fonts | Clash Display, Epilogue, Red Hat Display |
+
+---
+
+## Project Structure
+
+```
+src/
+├── assets/
+├── components/
+│   └── ScrollToTop.jsx
+├── context/
+│   ├── AuthContext.js
+│   └── AuthProvider.jsx
+├── firebase/
+│   └── firebase.init.js
+├── layouts/
+│   ├── RootLayout.jsx
+│   └── DashboardLayout.jsx
+├── logo/
+│   └── Logo.jsx
+├── pages/
+│   ├── auth/
+│   │   ├── Login.jsx
+│   │   └── Register.jsx
+│   ├── dashboard/
+│   │   ├── DashboardHome.jsx
+│   │   ├── PostJob.jsx
+│   │   ├── PostedJobs.jsx
+│   │   ├── EditJob.jsx
+│   │   ├── JobDetails.jsx
+│   │   ├── AppliedJobs.jsx
+│   │   └── Applicants.jsx
+│   ├── findjobs/
+│   │   └── FindJobs.jsx
+│   ├── home/
+│   │   ├── Home.jsx
+│   │   ├── Banner.jsx
+│   │   ├── Grow.jsx
+│   │   ├── Explore.jsx
+│   │   ├── Poster.jsx
+│   │   ├── Featured.jsx
+│   │   └── Latest.jsx
+│   └── shared/
+│       ├── Navbar.jsx
+│       └── Footer.jsx
+└── router/
+    ├── router.jsx
+    └── PrivateRoute.jsx
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- A Firebase project with Authentication enabled
+- A running backend server at `http://localhost:3000`
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/quickhire.git
+   cd quickhire
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the root with your Firebase config:
+   ```env
+   VITE_apiKey=your_api_key
+   VITE_authDomain=your_auth_domain
+   VITE_projectId=your_project_id
+   VITE_storageBucket=your_storage_bucket
+   VITE_messagingSenderId=your_messaging_sender_id
+   VITE_appId=your_app_id
+   ```
+
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+> Make sure your backend server is running on `http://localhost:3000` before starting the frontend.
+
+---
+
+## Routes
+
+| Path | Component | Access |
+|---|---|---|
+| `/` | Home | Public |
+| `/find-jobs` | FindJobs | Public |
+| `/browse-companies` | Companies | Public |
+| `/login` | Login | Public |
+| `/register` | Register | Public |
+| `/jobs/:id` | JobDetails | Public |
+| `/dashboard` | DashboardLayout | Private |
+| `/dashboard/post-job` | PostJob | Admin |
+| `/dashboard/posted-jobs` | PostedJobs | Admin |
+| `/dashboard/jobs/:id/edit` | EditJob | Admin |
+| `/dashboard/applicants` | Applicants | Admin |
+| `/dashboard/applied-jobs` | AppliedJobs | Applicant |
+| `/dashboard/dashboard-home` | DashboardHome | Private |
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `VITE_apiKey` | Firebase API Key |
+| `VITE_authDomain` | Firebase Auth Domain |
+| `VITE_projectId` | Firebase Project ID |
+| `VITE_storageBucket` | Firebase Storage Bucket |
+| `VITE_messagingSenderId` | Firebase Messaging Sender ID |
+| `VITE_appId` | Firebase App ID |
+
+---
+
+## Backend API Endpoints (Expected)
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/users?email=` | Get user by email |
+| GET | `/users/all` | Get all users |
+| POST | `/users` | Create new user |
+| GET | `/jobs` | Get all jobs (supports `?search=` and `?category=`) |
+| GET | `/jobs/:id` | Get single job |
+| POST | `/jobs` | Create a job |
+| PUT | `/jobs/:id` | Update a job |
+| DELETE | `/jobs/:id` | Delete a job |
+| GET | `/applications?email=` | Get applications by user email |
+| GET | `/applications/all` | Get all applications |
+| POST | `/applications` | Submit a job application |
+
+---
+
+<!-- ## License
+
+This project is open source and available under the [MIT License](LICENSE). -->
