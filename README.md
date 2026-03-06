@@ -1,4 +1,4 @@
-div align="center">
+<div align="center">
   <img src="/src/assets/logo.png" alt="QuickHire Logo" width="200"/>
   
   **Discover more than 5000 jobs**
