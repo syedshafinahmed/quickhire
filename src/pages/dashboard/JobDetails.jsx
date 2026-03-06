@@ -14,7 +14,7 @@ const JobDetails = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/applications?email=${user.email}`)
+      fetch(`https://quickhire-ssa.vercel.app/applications?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           const appliedIds = data.map((app) => app.jobId);
@@ -71,7 +71,7 @@ const JobDetails = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/applications", {
+      const res = await fetch("https://quickhire-ssa.vercel.app/applications", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

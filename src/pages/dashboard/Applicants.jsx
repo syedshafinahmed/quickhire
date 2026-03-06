@@ -7,7 +7,7 @@ const Applicants = () => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const res = await fetch("http://localhost:3000/applications/all");
+        const res = await fetch("https://quickhire-ssa.vercel.app/applications/all");
         const data = await res.json();
         setApplications(data);
       } catch (err) {

@@ -14,7 +14,7 @@ const AppliedJobs = () => {
     const fetchApplications = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/applications?email=${user?.email}`
+          `https://quickhire-ssa.vercel.app/applications?email=${user?.email}`
         );
         const data = await res.json();
         setApplications(data);

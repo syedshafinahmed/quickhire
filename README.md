@@ -12,13 +12,13 @@
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
-https://bloodlink-ssa.pages.dev/
+https://quickhire.pages.dev/
 
 ---
 
-# QuickHire 🚀
+# QuickHire 
 
 A full-stack job board web application built with React, Firebase, and MongoDB. QuickHire connects employers with applicants through a clean, role-based dashboard experience — complete with a polished public-facing landing page.
 

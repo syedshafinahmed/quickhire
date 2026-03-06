@@ -17,7 +17,7 @@ const EditJob = () => {
 
   useEffect(() => {
     const fetchJob = async () => {
-      const res = await fetch(`http://localhost:3000/jobs/${id}`);
+      const res = await fetch(`https://quickhire-ssa.vercel.app/jobs/${id}`);
       const data = await res.json();
       setJob(data);
     };
@@ -35,7 +35,7 @@ const EditJob = () => {
 
     const { _id, created_at, ...updatedJob } = job;
 
-    const res = await fetch(`http://localhost:3000/jobs/${id}`, {
+    const res = await fetch(`https://quickhire-ssa.vercel.app/jobs/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

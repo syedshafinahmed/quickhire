@@ -19,7 +19,7 @@ const Register = () => {
       await registerUser(email, password);
       await updateUserProfile({ displayName: name, photoURL: "https://via.placeholder.com/150", });
 
-      const response = await fetch("http://localhost:3000/users", {
+      const response = await fetch("https://quickhire-ssa.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

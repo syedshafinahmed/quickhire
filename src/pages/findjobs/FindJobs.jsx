@@ -18,7 +18,7 @@ const FindJobs = () => {
         category,
       });
 
-      const res = await fetch(`http://localhost:3000/jobs?${query}`);
+      const res = await fetch(`https://quickhire-ssa.vercel.app/jobs?${query}`);
       const data = await res.json();
 
       setJobs(data);

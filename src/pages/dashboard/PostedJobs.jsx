@@ -12,7 +12,7 @@ const PostedJobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:3000/jobs");
+        const res = await fetch("https://quickhire-ssa.vercel.app/jobs");
         const data = await res.json();
         setJobs(data);
       } catch (err) {
@@ -35,7 +35,7 @@ const PostedJobs = () => {
       confirmButtonText: "Yes, delete it",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await fetch(`http://localhost:3000/jobs/${id}`, {
+        const res = await fetch(`https://quickhire-ssa.vercel.app/jobs/${id}`, {
           method: "DELETE",
         });
 

@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         path: "jobs/:_id",
         Component: JobDetails,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/jobs/${params._id}`).then(res => res.json())
+          fetch(`https://quickhire-ssa.vercel.app/jobs/${params._id}`).then(res => res.json())
       }
     ]
   },

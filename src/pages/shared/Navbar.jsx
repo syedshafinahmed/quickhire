@@ -10,7 +10,7 @@ const Navbar = () => {
   const [userData, setUserData] = useState(null);
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/users?email=${user.email}`)
+      fetch(`https://quickhire-ssa.vercel.app/users?email=${user.email}`)
         .then(res => res.json())
         .then(data => setUserData(data))
         .catch(err => console.error("Failed to fetch user data:", err));

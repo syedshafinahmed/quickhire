@@ -15,7 +15,7 @@ const DashboardHome = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/users?email=${user.email}`)
+      fetch(`https://quickhire-ssa.vercel.app/users?email=${user.email}`)
         .then(res => res.json())
         .then(data => setUserData(data))
         .catch(err => console.error("Failed to fetch user data:", err));
@@ -28,11 +28,11 @@ const DashboardHome = () => {
     const fetchCounts = async () => {
       try {
         const [usersRes, jobsRes, applicationsRes] = await Promise.all([
-          fetch("http://localhost:3000/users/all"),
-          fetch("http://localhost:3000/jobs"),
+          fetch("https://quickhire-ssa.vercel.app/users/all"),
+          fetch("https://quickhire-ssa.vercel.app/jobs"),
           userData.role === "admin"
-            ? fetch("http://localhost:3000/applications/all")
-            : fetch(`http://localhost:3000/applications?email=${userData.email}`),
+            ? fetch("https://quickhire-ssa.vercel.app/applications/all")
+            : fetch(`https://quickhire-ssa.vercel.app/applications?email=${userData.email}`),
         ]);
 
         const usersData = await usersRes.json();
