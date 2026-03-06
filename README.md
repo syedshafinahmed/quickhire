@@ -227,9 +227,8 @@ src/
 
 ---
 
-## Backend Repository
+[↗ Backend Repository](https://github.com/syedshafinahmed/quickhire-server)
 
-https://github.com/syedshafinahmed/quickhire-server
 
 <!-- ## License
 
