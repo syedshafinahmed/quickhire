@@ -223,7 +223,6 @@ src/
 | GET    | `/applications/all`    | Get all applications                                |
 | POST   | `/applications`        | Submit a job application                            |
 
----
 
 <!-- ## License
 
