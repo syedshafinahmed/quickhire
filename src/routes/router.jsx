@@ -13,6 +13,7 @@ import PostedJobs from "../pages/dashboard/PostedJobs";
 import EditJob from "../pages/dashboard/EditJob";
 import AppliedJobs from "../pages/dashboard/AppliedJobs";
 import Applicants from "../pages/dashboard/Applicants";
+import DashboardHome from "../pages/dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "applicants",
         Component: Applicants
+      },
+      {
+        path: "dashboard-home",
+        Component: DashboardHome
       }
     ]
   }

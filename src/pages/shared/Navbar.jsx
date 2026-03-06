@@ -58,7 +58,7 @@ const Navbar = () => {
         user && (
           <NavLink
             className="text-[#515B6F] font-medium"
-            to="/dashboard"
+            to="/dashboard/dashboard-home"
             onClick={() => setIsOpen(false)}
           >
             Dashboard
