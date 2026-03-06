@@ -1,5 +1,12 @@
+# QuickHire 
+
+A full-stack job board web application built with React, Firebase, and MongoDB. QuickHire connects employers with applicants through a clean, role-based dashboard experience — complete with a polished public-facing landing page.
+
+---
+
+
 <div align="center">
-  <img src="/src/assets/logo.png" alt="QuickHire Logo" width="40"/>
+  <img src="/src/assets/logo.png" alt="QuickHire Logo" width="50"/>
 
  
   **Discover more than 5000 jobs**
@@ -18,11 +25,6 @@ https://quickhire.pages.dev/
 
 ---
 
-# QuickHire 
-
-A full-stack job board web application built with React, Firebase, and MongoDB. QuickHire connects employers with applicants through a clean, role-based dashboard experience — complete with a polished public-facing landing page.
-
----
 
 ## Features
 
