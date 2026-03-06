@@ -7,11 +7,23 @@ import { AuthContext } from "../../context/AuthContext";
 
 const JobDetails = () => {
   const job = useLoaderData();
+  const { user } = useContext(AuthContext);
 
   const [openModal, setOpenModal] = useState(false);
   const [appliedJobs, setAppliedJobs] = useState([]);
-  const { user } = useContext(AuthContext);
-  console.log(user?.displayName, user?.email);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:3000/applications?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const appliedIds = data.map((app) => app.jobId);
+          setAppliedJobs(appliedIds);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [user?.email]);
+  // console.log(user?.displayName, user?.email);
 
   const [formData, setFormData] = useState({
     applicantName: "",
@@ -35,8 +47,21 @@ const JobDetails = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const driveRegex =
+    /^https:\/\/(drive|docs)\.google\.com\/(file\/d\/|document\/d\/|open\?id=)/;
+
   const handleApply = async (e) => {
     e.preventDefault();
+
+    if (!driveRegex.test(formData.resumeLink)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid Resume Link",
+        text: "Please provide a valid Google Drive resume link.",
+        confirmButtonColor: "#4640DE",
+      });
+      return;
+    }
 
     const applicationData = {
       jobId: job._id,
@@ -224,8 +249,8 @@ const JobDetails = () => {
                   </label>
                   <input
                     name="resumeLink"
-                    placeholder="Google Drive / Portfolio / Resume URL"
-                    onChange={handleChange}
+                    placeholder="Google Drive / Resume URL"
+                    onChange={handleChange} required
                     className="border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4640DE]"
                   />
                 </div>
@@ -238,7 +263,7 @@ const JobDetails = () => {
                     name="coverLetter"
                     rows="4"
                     placeholder="Write a short cover letter..."
-                    onChange={handleChange}
+                    onChange={handleChange} required
                     className="border border-gray-300 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-[#4640DE]"
                   />
                 </div>
