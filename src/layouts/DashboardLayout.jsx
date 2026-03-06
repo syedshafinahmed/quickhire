@@ -58,12 +58,18 @@ const DashboardLayout = () => {
           </NavLink>
           <MenuItem icon={<LayoutDashboard size={18} />} label="Dashboard" active />
           <MenuItem icon={<MessageSquare size={18} />} label="Messages" />
-          <MenuItem icon={<Users size={18} />} label="Applicants" />
 
           {
             userData?.role === "admin" && (
               <NavLink to='/dashboard/posted-jobs'>
                 <MenuItem icon={<Briefcase size={18} />} label="Posted Jobs" />
+              </NavLink>
+            )
+          }
+          {
+            userData?.role === "admin" && (
+              <NavLink to='/dashboard/applicants'>
+                <MenuItem icon={<Users size={18} />} label="Applicants" />
               </NavLink>
             )
           }
