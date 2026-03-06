@@ -1,11 +1,7 @@
 <div align="center">
-  <!-- <img src="/src/assets/logo.png" alt="QuickHire Logo" width="20"/> -->
+  <img src="/src/assets/logo.png" alt="QuickHire Logo" width="40"/>
 
-  <div className='flex items-center gap-2'>
-      <img src="/src/assets/logo.png" alt="QuickHire Logo" width="20"/>
-      <p className='text-[#25324B] rhd font-bold text-2xl tracking-tight'>QuickHire</p>
-    </div>
-  
+ 
   **Discover more than 5000 jobs**
   
   [![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react)](https://react.dev/)
