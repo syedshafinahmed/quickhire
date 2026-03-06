@@ -223,6 +223,11 @@ src/
 | GET    | `/applications/all`    | Get all applications                                |
 | POST   | `/applications`        | Submit a job application                            |
 
+---
+
+## Backend Repository
+
+https://github.com/syedshafinahmed/quickhire-server
 
 <!-- ## License
 
